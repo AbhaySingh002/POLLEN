@@ -7,7 +7,7 @@ import (
 //go:embed intentPrompt.txt
 var intentPrompt string
 
-//go:embed basePrompt.txt
+//go:embed sysPrompt.txt
 var sysPrompt string
 
 type Prompt struct {

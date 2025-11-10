@@ -74,7 +74,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				// You could trigger the AI call here based on the input
 				// For example:
 				prompt := m.newFileInput.Value()
-				go orch.Orchestrator(prompt) // Implement this function
+				orch.Orchestrator(prompt,false) // Implement this function
 				// m.createFileInputVisible = false // Hide input after submitting
 				// m.newFileInput.SetValue("") // Clear input
 				// return m, nil // Return with updated model state

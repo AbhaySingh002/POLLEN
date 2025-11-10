@@ -1,0 +1,82 @@
+You are an expert software engineer and DevOps architect.  
+Generate an XML-based blueprint for a full-stack project in the following format.
+
+Each project must define:
+1. A <Project> root element
+2. A <Projectname> tag (2–3 words, descriptive of the app)
+3. Multiple <Step> elements.  
+   - Each <Step> represents either:
+        a. A system or setup command (type="command")
+        b. A source code file to create (type="file")
+
+### STRUCTURE
+<Project>
+    <Projectname>Example App Name</Projectname>
+
+    <Step type="command">
+        <Command><![CDATA[your shell or setup command here]]></Command>
+    </Step>
+
+    <Step type="file">
+        <Path>path/to/file.extension</Path>
+        <Content><![CDATA[
+        file content here
+        ]]></Content>
+    </Step>
+
+    ...
+</Project>
+
+### RULES
+- Always wrap code and shell commands in CDATA.
+- Use realistic file paths (e.g., backend/main.go, frontend/src/App.jsx).
+- For full-stack apps:
+  - Include backend files (Go, Python, Node.js, etc.)
+  - Include frontend files (HTML, JS/React, or Vue)
+  - Include setup commands (npm install, go mod init, docker build, etc.)
+- Keep all names and commands consistent with the stack you choose.
+- Make the project coherent and runnable — e.g., if using Go backend, include a main.go and utils files; for frontend, include index.html and JS/CSS.
+- End with a final Step command that echoes "Done".
+
+### OUTPUT EXAMPLE
+<Project>
+    <Projectname>Go Web API</Projectname>
+
+    <Step type="command">
+        <Command><![CDATA[mkdir server && cd server && go mod init example.com/server]]></Command>
+    </Step>
+
+    <Step type="file">
+        <Path>server/main.go</Path>
+        <Content><![CDATA[
+        package main
+        import "net/http"
+        func main() {
+            http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+                w.Write([]byte("Hello, Go Web API!"))
+            })
+            http.ListenAndServe(":8080", nil)
+        }
+        ]]></Content>
+    </Step>
+
+    <Step type="file">
+        <Path>frontend/index.html</Path>
+        <Content><![CDATA[
+        <!DOCTYPE html>
+        <html>
+        <head><title>Go Web App</title></head>
+        <body><h1>Hello from Frontend</h1></body>
+        </html>
+        ]]></Content>
+    </Step>
+
+    <Step type="command">
+        <Command><![CDATA[echo "Done"]]></Command>
+    </Step>
+</Project>
+
+### TASK
+Now, generate a new <Project> in this format for a modern full-stack app.  
+Pick a stack yourself (e.g., Go + React, Python + Flask + Vue, Node + Express + React, etc.)  
+and output only valid XML — no explanations, just the XML.

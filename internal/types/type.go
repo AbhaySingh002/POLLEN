@@ -1,14 +1,17 @@
 package types
 
-import "encoding/xml"
+import _ "encoding/xml"
 
-type Status string
+type Status struct{
+	State 	string
+	Errinfo error
+}
 
 const (
-	NotStarted 		Status = "not_started"
-	Running 		Status = "running"
-	Completed 		Status = "completed"
-	Failed 			Status = "failed"
+	NotStarted 	 = "not_started"
+	Running 	 = "running"
+	Completed 	 = "completed"
+	Failed 		 = "failed"
 )
 
 type IntentCheckingResponse struct {
@@ -16,24 +19,27 @@ type IntentCheckingResponse struct {
 	IsSafe 			bool `xml:"is_safe"`
 	NeedsReview 	bool `xml:"needs_review"`
 	Reason 			string `xml:"reason"`
-	SanitizedPrompt string `xml:"sanitized_prompt"`
+	IsDone			bool	`xml:"-"`
 }
 
 type Step struct {
-	Id 			string `xml:"id,attr"` // file, command
-	FilePath 	string `xml:"FilePath"`
+	Type 		string `xml:"type,attr"` // file, command
+	Path 		string `xml:"Path"`
 	Content 	string `xml:"Content"`
 	Command		string `xml:"Command"`
-	Status  	string `xml:"-"`
 }
 
 type Project struct {
-	XMLName 	xml.Name `xml:"PollenArtifact"`
-	Title   	string   `xml:"ProjectTitle"`
-	Steps   	[]Step   `xml:"Step"`
+	Title   	string   `xml:"Projectname"`
 }
 
-type StreamMessage struct {
+type CodeMessage struct {
 	Type    	string // "thought" | "xml"
 	Content 	string
+}
+
+type Task struct {
+	Type 	string
+	Details	any
+	Status 	Status
 }
