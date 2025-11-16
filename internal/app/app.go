@@ -60,9 +60,14 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, nil
 
 		case tea.KeyEsc.String():
-			m.isHome = true
-			m.mainMenuListVisible = false
-			return m, nil
+			if m.homelist.FilterState() == list.Filtering{
+				m.homelist.ResetFilter()
+				return m, nil
+			}else{
+				m.isHome = true
+				m.mainMenuListVisible = false
+				return m, nil
+			}
 		case "enter":
 			if m.mainMenuListVisible {
 				i, ok := m.homelist.SelectedItem().(component.Item)
