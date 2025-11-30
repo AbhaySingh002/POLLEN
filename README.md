@@ -1,4 +1,4 @@
-# POLLEN
+# POLLEN - building phase
 
 <p align="center">
   <img src="assets/1.png" width="350">
